@@ -148,4 +148,14 @@ set 을 붙여 만든 행위는 = 처럼 값을 넣는 행위를 할 때 자동�
 EX> if(numberFromLiteral.constructor == Number)...
 
 - Object 는 모든 객체의 최상위 객체이므로 prototype 객체에 추가한 메서드는 모든 객체에서 사용 가능하다.
-- Number / String / 
+- Number / String / Array / Date / Math 객체 등 사용 가능
+- forEach() 메서드의 매개변수에는 function(element, index, array) { } 형태의 함수를 넣는데, element 는 배열의요소, index 는 인덱스, array 는 현재 반복을 수행하는 배열 자체를 의미한다.
+- map 메서드는 배열의 각 요소를 변경해 새로운 배열을 리턴하는 메서드이며 function(element){ } 형태의 함수를 넣는다.
+cf) reduce() 메서드 , underscore 라이브러리
+
+- JSON 객체 : stringify() / parse()
+
+## 9. 브라우저 객체 모델
+- 브라우저 관련된 객체로는 window, location, navigator, history, screen, documnet 객체가 있다.
+- window 는 브라우저 기반 최상위 객체이다.
+- screen 객체는 운영체제 화면의 속성을 갖는 객체이다. 
