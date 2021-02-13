@@ -98,5 +98,54 @@ EX> alert(\`표현식 273+52의 값은 ${52+273} 입니다 ... !\`);
   - 전개 연산자를 두 번 사용할 경우, 배열을 병합할 수도 있다.
   EX> const newArray = [...arrayA, ...arrayB];
   
-  
+## 7. 생성자
+- 생성자 함수의 경우, 일반적으로 대문자로 시작하며 new 키워드로 객체를 생성한다.
+- 프로토 타입이란 생성자 함수로 생성된 객체가 공통으로 가지는 공간이며 사용하려면 해당 생성자.prototype 으로 명시한 후 .속성명 = function(){ } ; 과 같은 방법으로 할당 가능하다.
+- new 키워드를 사용하지 않고 생성자 함수를 실행하면 해당 객체를 위한 공간을 만드는 것이 아니라 window 객체에 속성을 추가한 것 처럼 작동한다.
 
+  ### 캡슐화
+  - 생성자 함수 내에 this.get/set 함수를 설정함으로써 설정 값의 제한을 둘 수 있고 만일의 상황에 대비해 특정 속성이나 메서드를 사용자가 사용할 수 없게 숨길 수 있다.
+  ### 상속
+  - 특정 생성자 함수 내부에 속성으로 다른 생성자 함수를 넣고 prototype 을 전달해주고 .constructor 를 재지정하는 것으로 상속으로 동작하도록 할 수 있다.
+  EX>
+  <pre>
+    <code>
+      function Square(length){
+        this.base = Rectangle;
+        this.base(length, length);
+      }
+      
+      Square.prototype = Rectangle.prototype;
+      Square.prototype.constructor = Square;
+    </code>
+  </pre>
+  
+  - 생성자 함수에 constructor() 메서드를 다시 넣지 않아도 정상동작하지만, square 객체의 constructor() 메서드를 출력할 경우 생성자 함수 Rectangle 을 가리키므로
+  프로토타입의 생성자 함수를 재정의하였다.
+  
+- ECMAScript 6 의 클래스는 변수를 숨길 수 없다. 그래서 일반적으로 개발자외에 만지지 말아달라는 의미로 변수 앞에 _ 를 붙인다.
+- 게터와 세터는 선언할 때 앞에 get 또는 set 을 붙여 선언한다. get 을 붙여 만든 메서드는 rectangle.width 처럼 값을 가져오는 행위를 할 때 자동으로 호출되며,
+set 을 붙여 만든 행위는 = 처럼 값을 넣는 행위를 할 때 자동으로 호출된다.
+그러나, 게터와 세터를 사용하면 스택 트레이스와 유지 보수가 어렵고 메서드 체이닝에 활용하기 어렵다.
+
+- 상속은 extends 키워드로 구현할 수 있다.
+
+  <pre>
+    <code>
+    class Square extends Rectangle {
+      constructor(length){
+        super(length, length);
+        alert(this)
+      }
+    </code>
+  </pre>
+
+## 8. 기본 내장 객체
+- 기본 자료형에 속성이나 메서드를 사용하게 될 경우, 자동으로 객체로 변환된다, 하지만 임시적인 것이므로 속성이나 메서드를 추가할 수 없다.
+추가하려면 프로토타입으로 메서드를 추가하여 임시적인 객체에서 사용해야 한다.
+- 생성자 함수 등을 추가한 경우에는 propertyIsEnumerable() 과 같은 메서드로 나열 가능한지 검사 후, for in 반복문으로 출력하여야한다.
+- 생성자 함수로 만든 숫자와 같은 자료형은 객체가 되므로 typeof 와 같은 연산자가 아닌 constructor 메서드를 사용하는 것이 좋다.ㅏ
+EX> if(numberFromLiteral.constructor == Number)...
+
+- Object 는 모든 객체의 최상위 객체이므로 prototype 객체에 추가한 메서드는 모든 객체에서 사용 가능하다.
+- Number / String / 
